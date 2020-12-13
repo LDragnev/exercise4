@@ -1,0 +1,48 @@
+<mvc:View
+	controllerName="sap.ui.demo.nav.controller.customer.CustomerList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="CustomerListPage"
+		title="{i18n>CustomerList}"
+		showNavButton="true"
+		navButtonPress=".onNavBack"
+		class="sapUiResponsiveContentPadding">
+		<content>
+			<Table inset="false" items="{ path: '/CustomersSet' }">
+				<headerToolbar>
+					<OverflowToolbar>
+						<content>
+							<Title text="Rooms" level="H2"/>
+							<ToolbarSpacer/>
+						</content>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="12em">
+						<Text text="First Name"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="Last Name"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="City"/>
+					</Column>
+					<Column hAlign="End">
+						<Text text="Address"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Navigation" press=".onListItemPressed">
+						<cells>
+							<Text text="{FirstName}"/>
+							<Text text="{LastName}"/>
+							<Text text="{City}"/>
+							<Text text="{Address}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

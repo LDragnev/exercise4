@@ -1,0 +1,75 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/></edmx:Reference>
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZKPMGBANK_SRV_01" xml:lang="en" sap:schema-version="1">
+			<EntityType Name="Customers" sap:content-version="1">
+				<Key><PropertyRef Name="CustomerId"/></Key><Property Name="CustomerId" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="First Name"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="LNAME" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="City" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="City" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Address" Type="Edm.String" Nullable="false" MaxLength="210" sap:unicode="false" sap:label="Add Detail" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="AccountsSet" Relationship="ZKPMGBANK_SRV_01.CustomersAccounts" FromRole="FromRole_CustomersAccounts"
+					ToRole="ToRole_CustomersAccounts"/></EntityType>
+			<EntityType Name="Accounts" sap:content-version="1">
+				<Key><PropertyRef Name="AccountId"/><PropertyRef Name="CustomerId"/></Key><Property Name="AccountId" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CustomerId" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="AccountNumber" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Account Number"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Balance" Type="Edm.Int64" Nullable="false" sap:unicode="false" sap:label="Account balance" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="IsActive" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="TRUE" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="File" m:HasStream="true" sap:content-version="1">
+				<Key><PropertyRef Name="Id"/></Key><Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Mimetype" Type="Edm.String" Nullable="false" MaxLength="64" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Content" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="ZC_CUSTOMERSWITHACCOUNTSType" sap:label="Customer-accounts relation, consumption" sap:content-version="1">
+				<Key><PropertyRef Name="CustId"/></Key><Property Name="CustId" Type="Edm.Int32" Nullable="false" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/><Property Name="FirstName" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="First Name"/><Property Name="LastName" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="LNAME" sap:quickinfo="LAST NAME"/><NavigationProperty Name="to_Accounts" Relationship="ZKPMGBANK_SRV_01.assoc_1045B72AA509DC879943D08D0B00275E"
+					FromRole="FromRole_assoc_1045B72AA509DC879943D08D0B00275E" ToRole="ToRole_assoc_1045B72AA509DC879943D08D0B00275E"/></EntityType>
+			<EntityType Name="ZI_ACCOUNTSType" sap:label="Accounts details table" sap:content-version="1">
+				<Key><PropertyRef Name="AccountId"/><PropertyRef Name="CustomerId"/></Key><Property Name="AccountId" Type="Edm.Int32" Nullable="false" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/><Property Name="CustomerId" Type="Edm.Int32" Nullable="false" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/><Property Name="AccountNumber" Type="Edm.String" MaxLength="25" sap:display-format="UpperCase" sap:label="Account Number"/><Property Name="Balance" Type="Edm.Int64" sap:label="Account balance"/><Property Name="IsActive" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="TRUE"
+					sap:quickinfo="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"/></EntityType>
+			<ComplexType Name="AccountCheck"><Property Name="Exists" Type="Edm.String" Nullable="false" MaxLength="5" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+				sap:filterable="false"/></ComplexType>
+			<Association Name="assoc_1045B72AA509DC879943D08D0B00275E" sap:content-version="1"><End Type="ZKPMGBANK_SRV_01.ZC_CUSTOMERSWITHACCOUNTSType" Multiplicity="1" Role="FromRole_assoc_1045B72AA509DC879943D08D0B00275E"/><End Type="ZKPMGBANK_SRV_01.ZI_ACCOUNTSType" Multiplicity="*" Role="ToRole_assoc_1045B72AA509DC879943D08D0B00275E"/></Association>
+			<Association Name="CustomersAccounts" sap:content-version="1"><End Type="ZKPMGBANK_SRV_01.Customers" Multiplicity="1" Role="FromRole_CustomersAccounts"/><End Type="ZKPMGBANK_SRV_01.Accounts" Multiplicity="*" Role="ToRole_CustomersAccounts"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_CustomersAccounts"><PropertyRef Name="CustomerId"/></Principal>
+					<Dependent Role="ToRole_CustomersAccounts"><PropertyRef Name="CustomerId"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZKPMGBANK_SRV_01_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true"
+				sap:supported-formats="atom json xlsx"><EntitySet Name="ZC_CUSTOMERSWITHACCOUNTS" EntityType="ZKPMGBANK_SRV_01.ZC_CUSTOMERSWITHACCOUNTSType" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:content-version="1"/><EntitySet Name="ZI_ACCOUNTS" EntityType="ZKPMGBANK_SRV_01.ZI_ACCOUNTSType" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:content-version="1"/><EntitySet Name="CustomersSet" EntityType="ZKPMGBANK_SRV_01.Customers" sap:pageable="false" sap:content-version="1"/><EntitySet Name="AccountsSet" EntityType="ZKPMGBANK_SRV_01.Accounts" sap:creatable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="FileSet" EntityType="ZKPMGBANK_SRV_01.File" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+				<AssociationSet Name="assoc_1045B72AA509DC879943D08D0B00275E" Association="ZKPMGBANK_SRV_01.assoc_1045B72AA509DC879943D08D0B00275E"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="ZC_CUSTOMERSWITHACCOUNTS" Role="FromRole_assoc_1045B72AA509DC879943D08D0B00275E"/><End EntitySet="ZI_ACCOUNTS" Role="ToRole_assoc_1045B72AA509DC879943D08D0B00275E"/></AssociationSet>
+				<AssociationSet Name="CustomersAccountsSet" Association="ZKPMGBANK_SRV_01.CustomersAccounts" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="CustomersSet" Role="FromRole_CustomersAccounts"/><End EntitySet="AccountsSet" Role="ToRole_CustomersAccounts"/></AssociationSet>
+				<FunctionImport Name="AccountCheck" ReturnType="ZKPMGBANK_SRV_01.AccountCheck" m:HttpMethod="POST"
+					sap:action-for="ZKPMGBANK_SRV_01.Accounts"><Parameter Name="AccountNum" Type="Edm.String" Mode="In"/></FunctionImport>
+			</EntityContainer>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZKPMGBANK_SRV_01.ZKPMGBANK_SRV_01_Entities">
+				<Annotation Term="Aggregation.ApplySupported">
+					<Record>
+						<PropertyValue Property="Transformations">
+							<Collection>
+								<String>aggregate</String>
+								<String>groupby</String>
+								<String>filter</String>
+							</Collection>
+						</PropertyValue><PropertyValue Property="Rollup" EnumMember="None"/></Record>
+				</Annotation>
+			</Annotations><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZKPMGBANK_SRV_01/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZKPMGBANK_SRV_01/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
